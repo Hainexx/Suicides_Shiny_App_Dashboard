@@ -110,8 +110,9 @@ source('main.R')
     reactive_data <- reactive({
       country_year_tibble[country_year_tibble$country == input$select, ]
       })
+      
     
-    shared_data <- SharedData$new(reactive_data)
+    shared_data <- SharedData$new(reactive_data, group = "hello")
     
     output$fnal <- renderPlotly({
       plot_ly(shared_data, x = ~year, y = ~suicide_capita, 

@@ -14,7 +14,7 @@
 # This function makes life easier to who is going to open the app through `runGitHub()` because it installs every needed package automatically
 automate_loading <- function(){
             if(!require('pacman'))install.packages('pacman')
-            pacman::p_load(shiny,sandwich,stargazer,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp)
+            pacman::p_load(shiny,sandwich,stargazer,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp,crosstalk)
 }
 
 automate_loading()
