@@ -1,6 +1,6 @@
 # Load R packages
-library(shiny)
-library(shinythemes)
+require(shiny)
+require(shinythemes)
 
 source('main.R')
 

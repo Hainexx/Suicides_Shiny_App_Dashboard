@@ -1,12 +1,12 @@
-library(flexdashboard) # Dashboard package
-library(highcharter) # Interactive data visualizations
-library(viridis) # Color gradients
-library(tidyverse) 
-library(countrycode) # Converting country names/codes
-library(DT) # Displaying data tables
-library(crosstalk) # Provides interactivity for HTML widgets
-library(plotly) # Interactive data visualizations
-library(shiny) #shiny
+require(flexdashboard) # Dashboard package
+require(highcharter) # Interactive data visualizations
+require(viridis) # Color gradients
+require(tidyverse) 
+require(countrycode) # Converting country names/codes
+require(DT) # Displaying data tables
+require(crosstalk) # Provides interactivity for HTML widgets
+require(plotly) # Interactive data visualizations
+require(shiny) #shiny
 
 
 data <- read.csv('master.csv') %>%
@@ -106,8 +106,8 @@ south_america <- c('Argentina', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyan
 data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
-library(sandwich)
-library(stargazer)
+require(sandwich)
+require(stargazer)
 
 plm_id_fix <- lm(suicides.100k.pop ~ gdp_per_capita.... + sex + age+ country -1, data = data)
 
@@ -157,7 +157,7 @@ country_year_tibble <- data %>%
 # I have to create a list of named countries with their 'value' associated 'cause that's  
 # the input that the slider takes.  -----
 
-library(Rcpp)
+require(Rcpp)
 list_x <- as.character(avg_dt$country)
 
 Rcpp::sourceCpp('enlist.cpp')
