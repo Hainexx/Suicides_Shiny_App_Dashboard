@@ -92,6 +92,10 @@ source('main.R')
                  p(' '),
                  plotlyOutput(outputId = "scatter")
                )
+               ),
+      tabPanel("About", #Navbar 4
+               h3("Hotlines and References"),
+               includeMarkdown("about.md")
                )
   
     ) # navbarPage

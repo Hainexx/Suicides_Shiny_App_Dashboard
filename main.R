@@ -8,7 +8,8 @@ library(crosstalk) # Provides interactivity for HTML widgets
 library(plotly) # Interactive data visualizations
 library(shiny) #shiny
 library(parallel)
-data <- read.csv('https://raw.githubusercontent.com/SabaTavoosi/Suicide-data---Interactive-dashboard/master/master.csv') %>%
+
+data <- read.csv('master.csv') %>%
             filter(year != 2016, # filter out 2016 and countries with 0 data. 
                    country != 'Dominica',
                    country != 'Saint Kitts and Nevis')
@@ -106,7 +107,9 @@ data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
 source('data_analysis.R')
-# Create a tibble for continent and sex.
+
+# Create a tibble for continent and sex.  -----
+
 continent_sex_tibble <- data %>%
             select(continent, sex, suicides_no, population) %>%
             group_by(continent, sex) %>%
@@ -129,17 +132,8 @@ country_year_tibble <- data %>%
             summarise(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2)) 
 
 
-
-# Create tibble for our line plot.  
-#country_year_tibble <- data %>%
-#            select(country, year, suicides_no, population) %>%
-#            group_by(country, year) %>%
-#            summarise(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2)) 
-
-
-
 # I have to create a list of named countries with their 'value' associated 'cause that's  
-# the input that the slider takes.
+# the input that the slider takes.  -----
 
 library(Rcpp)
 list_x <- as.character(avg_dt$country)
@@ -147,18 +141,21 @@ list_x <- as.character(avg_dt$country)
 Rcpp::sourceCpp('enlist.cpp')
 country_list <- enlist(list_x)
 
-#list_countries <- function(country) {
-#            x <- vector()
-#            x <- list(country)
-#            names(x) <- country
-#            return(x)
-#}
-#
-#xd <- vector(mode = 'list')
-#for (i in list_x){
-#            xd <- append(xd, list_countries(i))
-#            }
+### Same function but in base R and consequent benchmark to compare their speed  -----
+
+# list_countries <- function(country) {
+#             x <- vector()
+#             x <- list(country)
+#             names(x) <- country
+#             return(x)
+# }
+# 
+# xd <- vector(mode = 'list')
+# for (i in list_x){
+#             xd <- append(xd, list_countries(i))
+#             }
 
 
-# Let's prove that the Rcpp function is more than 100x faster with a simple test   
+#### Let's prove that the Rcpp function is more than 100x faster with a simple test -----
+
 # microbenchmark(for (i in list_x){xd <- append(xd, list_countries(i))}, enlist(list_x)) 
