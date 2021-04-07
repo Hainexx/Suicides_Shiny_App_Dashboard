@@ -143,17 +143,17 @@ country_list <- enlist(list_x)
 
 ### Same function but in base R and consequent benchmark to compare their speed  -----
 
-# list_countries <- function(country) {
-#             x <- vector()
-#             x <- list(country)
-#             names(x) <- country
-#             return(x)
-# }
-# 
-# xd <- vector(mode = 'list')
-# for (i in list_x){
-#             xd <- append(xd, list_countries(i))
-#             }
+list_countries <- function(country) {
+             x <- vector()
+             x <- list(country)
+             names(x) <- country
+             return(x)
+ }
+ 
+xd <- vector(mode = 'list')
+for (i in list_x){
+             xd <- append(xd, list_countries(i))
+             }
 
 
 #### Let's prove that the Rcpp function is more than 100x faster with a simple test -----
