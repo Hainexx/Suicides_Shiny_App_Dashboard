@@ -1,5 +1,7 @@
 # Suicides Over the World Control Dashboard 
-This Shiny App can be launched by typing in your R console `library(shiny)` and `runGitHub(repo = "Hainexx/Suicides_Shiny_App_Dashboard")` or alternatively it is reachable at https://hainexx.shinyapps.io/Suicides_Shiny_App_Dashboard-master/.
+This Shiny App can be launched by installing the Shiny library through typing in your R console `install.packages('shiny)` and then `library(shiny)` to load it and finally `runGitHub(repo = "Hainexx/Suicides_Shiny_App_Dashboard")` to execute. I wrote the code so that every needed library will be automatically installed and loaded. 
+
+Alternatively it is reachable at https://hainexx.shinyapps.io/Suicides_Shiny_App_Dashboard-master/.
 
 ## File Descprition
 ***main.R***: 
@@ -14,7 +16,7 @@ This is a C++ function that I implemented through the Rcpp library in my script 
 ***master.csv***:
 the used dataset. Further references are provided below.
 
-***about.md***: The page I wrote for the last page of the app. 
+***about.md***: last page of the app directly written in md. 
 
 ***sessionInfo.txt***: information about loaded libraries and system specs.
 
