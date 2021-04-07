@@ -16,6 +16,8 @@ the used dataset. Further references are provided below.
 
 ***about.md***: The page I wrote for the last page of the app. 
 
+***sessionInfo.txt***: information about loaded libraries and system specs.
+
 
 ## Getting Help
 
