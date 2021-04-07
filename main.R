@@ -1,13 +1,15 @@
-require(flexdashboard) # Dashboard package
-require(highcharter) # Interactive data visualizations
-require(viridis) # Color gradients
-require(tidyverse) 
-require(countrycode) # Converting country names/codes
-require(DT) # Displaying data tables
-require(crosstalk) # Provides interactivity for HTML widgets
-require(plotly) # Interactive data visualizations
-require(shiny) #shiny
+#require(flexdashboard) # Dashboard package
+#require(highcharter) # Interactive data visualizations
+#require(viridis) # Color gradients
+#require(tidyverse) 
+#require(countrycode) # Converting country names/codes
+#require(DT) # Displaying data tables
+#require(crosstalk) # Provides interactivity for HTML widgets
+#require(plotly) # Interactive data visualizations
+#require(shiny) #shiny
 
+if(!require('pacman'))install.packages('pacman')
+pacman::p_load(shiny,shinyjs,httr,jsonlite,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly)
 
 data <- read.csv('master.csv') %>%
             filter(year != 2016, # filter out 2016 and countries with 0 data. 
