@@ -7,9 +7,17 @@
 #require(crosstalk) # Provides interactivity for HTML widgets
 #require(plotly) # Interactive data visualizations
 #require(shiny) #shiny
+#require(sandwich)
+#require(stargazer)
+#require(Rcpp)
 
-if(!require('pacman'))install.packages('pacman')
-pacman::p_load(shiny,shinyjs,httr,jsonlite,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly)
+# This function makes life easier to who is going to open the app through `runGitHub()` because it installs every needed package automatically
+automate_loading <- function(){
+            if(!require('pacman'))install.packages('pacman')
+            pacman::p_load(shiny,sandwich,stargazer,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp)
+}
+
+automate_loading()
 
 data <- read.csv('master.csv') %>%
             filter(year != 2016, # filter out 2016 and countries with 0 data. 
@@ -108,8 +116,6 @@ south_america <- c('Argentina', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyan
 data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
-require(sandwich)
-require(stargazer)
 
 plm_id_fix <- lm(suicides.100k.pop ~ gdp_per_capita.... + sex + age+ country -1, data = data)
 
@@ -159,7 +165,7 @@ country_year_tibble <- data %>%
 # I have to create a list of named countries with their 'value' associated 'cause that's  
 # the input that the slider takes.  -----
 
-require(Rcpp)
+
 list_x <- as.character(avg_dt$country)
 
 Rcpp::sourceCpp('enlist.cpp')

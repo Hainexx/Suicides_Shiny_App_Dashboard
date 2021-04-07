@@ -1,6 +1,7 @@
 # Load R packages
-require(shiny)
-require(shinythemes)
+#require(shiny)
+#require(shinythemes)
+
 if(!require('pacman'))install.packages('pacman')
 pacman::p_load(shiny,shinythemes)
 
