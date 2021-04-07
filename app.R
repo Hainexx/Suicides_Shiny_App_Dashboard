@@ -1,7 +1,7 @@
 # Load R packages
 library(shiny)
 library(shinythemes)
-library(parallel)
+
 source('main.R')
 
   # Define UI

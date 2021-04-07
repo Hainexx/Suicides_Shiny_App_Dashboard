@@ -7,7 +7,7 @@ library(DT) # Displaying data tables
 library(crosstalk) # Provides interactivity for HTML widgets
 library(plotly) # Interactive data visualizations
 library(shiny) #shiny
-library(parallel)
+
 
 data <- read.csv('master.csv') %>%
             filter(year != 2016, # filter out 2016 and countries with 0 data. 
@@ -106,7 +106,29 @@ south_america <- c('Argentina', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyan
 data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
-source('data_analysis.R')
+library(sandwich)
+library(stargazer)
+
+plm_id_fix <- lm(suicides.100k.pop ~ gdp_per_capita.... + sex + age+ country -1, data = data)
+
+#coeftest(plm_id_fix, vcov. = vcovHC, type = "HC1")
+
+# robust standard errors
+rob_se_pan <- list(sqrt(diag(vcovHC(plm_id_fix, type = "HC1"))))
+
+res <- stargazer(plm_id_fix,      
+                 header = FALSE, 
+                 type = "html",
+                 omit.table.layout = "n",
+                 digits = 3,
+                 dep.var.labels.include = FALSE,
+                 se = rob_se_pan)
+
+a <- res[1:13] 
+res <- append(a, res[320:325])
+res
+
+
 
 # Create a tibble for continent and sex.  -----
 
