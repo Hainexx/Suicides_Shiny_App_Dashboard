@@ -1,4 +1,6 @@
 # Suicides Over the World Control Dashboard 
+This dashboard is intended to provide some general insight on the delicate matter of suicides all over the world based on a dataset with data that range from 1985 to 2015 for every country accounting for sex, age and economic variables such as per capita GDP.
+
 The App is reachable at https://hainexx.shinyapps.io/Suicides_Shiny_App_Dashboard-master/.
 
 Alternatively this Shiny App can be launched by installing the Shiny library on R typing in your console the following comands: 
