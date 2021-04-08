@@ -79,7 +79,7 @@ sex_color <- c("#83c99d", "#95a2f0") # baby blue & pink
 
 sex_tibble <- data %>%
             select(year, sex, suicides_no, population) %>%
-            group_by(year, sex) %>%
+            group_by(year,sex) %>%
             summarise(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2))
 
 pie_sex <- data %>%
@@ -119,28 +119,6 @@ south_america <- c('Argentina', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyan
 data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
-
-plm_id_fix <- lm(`suicides/100k pop` ~ `gdp_per_capita ($)` + sex + age+ country -1, data = data)
-
-#coeftest(plm_id_fix, vcov. = vcovHC, type = "HC1")
-
-# robust standard errors
-rob_se_pan <- list(sqrt(diag(vcovHC(plm_id_fix, type = "HC1"))))
-
-res <- stargazer(plm_id_fix,
-                 header = FALSE, 
-                 type = "html",
-                 omit.table.layout = "n",
-                 digits = 3,
-                 dep.var.labels.include = FALSE,
-                 se = rob_se_pan)
-
-a <- res[1:12] 
-res <- append(a, res[319:324])
-
-
-
-
 # Create a tibble for continent and sex.  -----
 
 continent_sex_tibble <- data %>%
@@ -149,25 +127,44 @@ continent_sex_tibble <- data %>%
             summarize(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2))
 
 dt <- data %>%
-            select(country, year, suicides_no, population, `gdp_per_capita ($)`) %>%
-            group_by(country, year, `gdp_per_capita ($)`)%>%
-            summarise(suicide_cap = round((sum(suicides_no)/sum(population))*100000, 2))
-            
+            select(country, year, suicides_no, population, `gdp_per_capita ($)`,`suicides/100k pop`) %>%
+            group_by(country, year, `gdp_per_capita ($)`,`suicides/100k pop`)
+
 avg_dt <- dt %>%
             group_by(country)%>%
             summarise(avg_gdp = round(sum(`gdp_per_capita ($)`)/length(`gdp_per_capita ($)`)),
-                      avg_sui = sum(suicide_cap)/length(suicide_cap)
+                      avg_sui = sum(`suicides/100k pop`)/length(`suicides/100k pop`)
                       )
 
-country_year_tibble <- data %>%
-            select(country, year, suicides_no, population) %>%
-            group_by(country, year) %>%
-            summarise(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2)) 
+country_year_tibble <- data %>% select(
+            country, year, suicides_no, population) %>% group_by(
+                        country, year) %>% summarise(
+                        suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2)) 
+
+### Let's perform some basic analysy 
+plm_id_fix <- lm(`suicides/100k pop` ~ `gdp_per_capita ($)` + sex + age+ country -1, data = data)
+
+summary(plm_id_fix)
+
+# robust standard errors
+rob_se_pan <- list(sqrt(diag(vcovHC(plm_id_fix, type = "HC1"))))
+
+res <- stargazer(plm_id_fix,covariate.labels = "GDP Per Capita",
+                 header = F, 
+                 type = "html",
+                 omit.table.layout = "n",
+                 digits = 3,
+                 dep.var.labels.include = T,
+                 se = rob_se_pan)
+
+a <- res[1:13] 
+res <- append(a, res[319:325])
+
+
 
 
 # I have to create a list of named countries with their 'value' associated 'cause that's  
 # the input that the slider takes.  -----
-
 
 list_x <- as.character(avg_dt$country)
 

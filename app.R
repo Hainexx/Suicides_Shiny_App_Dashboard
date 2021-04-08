@@ -89,7 +89,7 @@ source('main.R')
                    style = "font-family: 'times'; font-si16pt"),
                  
                  
-                 HTML(res)
+                 HTML(res),
                  
                ),
                mainPanel(
@@ -131,9 +131,7 @@ source('main.R')
         highlight("plotly_click")
     })  
       
-    output$result <- renderText({
-      res
-    })
+    
     
     output$scatter  <- renderPlotly({
       plot_ly(data = avg_dt, y = ~avg_sui, x= ~avg_gdp, color= ~country,size = ~avg_sui, type = 'scatter', mode = 'markers') %>%
