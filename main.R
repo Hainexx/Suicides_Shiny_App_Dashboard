@@ -132,8 +132,8 @@ res <- stargazer(plm_id_fix,
                  dep.var.labels.include = FALSE,
                  se = rob_se_pan)
 
-a <- res[1:13] 
-res <- append(a, res[320:325])
+a <- res[1:12] 
+res <- append(a, res[319:324])
 res
 
 

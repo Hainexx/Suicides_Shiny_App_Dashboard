@@ -86,7 +86,7 @@ source('main.R')
                    style = "font-family: 'times'; font-si16pt"),
                  
                  
-                 HTML(res, align = "center"),
+                 HTML(res)
                  
                ),
                mainPanel(
