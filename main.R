@@ -14,25 +14,30 @@
 # This function makes life easier to who is going to open the app through `runGitHub()` because it installs every needed package automatically
 automate_loading <- function(){
             if(!require('pacman'))install.packages('pacman')
-            pacman::p_load(shiny,sandwich,stargazer,tidyverse,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp,crosstalk)
+            pacman::p_load(tidyverse,shiny,sandwich,stargazer,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp,crosstalk,DT)
 }
 
 automate_loading()
+data_path <- file.path(".","master.csv")
 
-data <- read.csv('master.csv') %>%
-            filter(year != 2016, # filter out 2016 and countries with 0 data. 
-                   country != 'Dominica',
-                   country != 'Saint Kitts and Nevis')
+
+data <- read.csv(data_path) %>% filter(
+            year != 2016, # filter out 2016 and countries with 0 data.
+            country != 'Dominica',
+            country != 'Saint Kitts and Nevis')
 
 # Fix the names of some of the countries in our data to match the country names 
 # used by our map later on so that they'll be interpreted and displayed. 
-data <- data %>%
-            mutate(country = fct_recode(country, "The Bahamas" = "Bahamas"),
-                   country = fct_recode(country, "Cape Verde" = "Cabo Verde"),
-                   country = fct_recode(country, "South Korea" = "Republic of Korea"),
-                   country = fct_recode(country, "Russia" = "Russian Federation"),
-                   country = fct_recode(country, "Republic of Serbia" = "Serbia"),
-                   country = fct_recode(country, "United States of America" = "United States"))
+
+data <- data %>% mutate(
+            country = fct_recode(country, "The Bahamas" = "Bahamas"),
+            country = fct_recode(country, "Cape Verde" = "Cabo Verde"),
+            country = fct_recode(country, "South Korea" = "Republic of Korea"),
+            country = fct_recode(country, "Russia" = "Russian Federation"),
+            country = fct_recode(country, "Republic of Serbia" = "Serbia"),
+            country = fct_recode(country, "United States of America" = "United States")
+            )
+
 
 # Reorder levels of age to be in chronological order.
 data$age <- factor(data$age, levels = c("5-14 years", "15-24 years", "25-34 years", "35-54 years", "55-74 years", "75+ years"))
@@ -134,7 +139,7 @@ res <- stargazer(plm_id_fix,
 
 a <- res[1:12] 
 res <- append(a, res[319:324])
-res
+
 
 
 
