@@ -18,13 +18,11 @@ automate_loading <- function(){
 }
 
 automate_loading()
+
 data_path <- file.path(".","master.csv")
 
 
-data <- read_csv(data_path) %>% filter(
-            year != 2016, # filter out 2016 and countries with 0 data.
-            country != 'Dominica',
-            country != 'Saint Kitts and Nevis')
+data <- read_csv(data_path) %>% filter(year != 2016, country != 'Dominica', country != 'Saint Kitts and Nevis')
 
 # Fix the names of some of the countries in our data to match the country names 
 # used by our map later on so that they'll be interpreted and displayed. 
