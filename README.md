@@ -1,7 +1,15 @@
 # Suicides Over the World Control Dashboard 
-This Shiny App can be launched by installing the Shiny library typing in your R console `install.packages("shiny")` and then `library(shiny)` to load it and finally `runGitHub(repo = "Hainexx/Suicides_Shiny_App_Dashboard")` to execute. I wrote the code so that every needed library will be automatically installed and loaded. 
+The App is reachable at https://hainexx.shinyapps.io/Suicides_Shiny_App_Dashboard-master/.
 
-Alternatively it is reachable at https://hainexx.shinyapps.io/Suicides_Shiny_App_Dashboard-master/.
+Alternatively this Shiny App can be launched by installing the Shiny library on R typing in your console the following comands: 
+
+`install.packages("shiny")`\
+`library(shiny)` \
+`runGitHub(repo = "Hainexx/Suicides_Shiny_App_Dashboard")`
+
+Beware that every needed library will be automatically installed in your system without any further notice and loaded. The list of the needed packages can be found in *sessionInfo.txt*.
+
+**Make sure** you've installed the latest version of *R == 4.0.5 (2021-03-31) -- "Shake and Throw"* or the code won't run.
 
 ## File Descprition
 ***main.R***: 
