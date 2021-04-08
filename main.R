@@ -14,14 +14,14 @@
 # This function makes life easier to who is going to open the app through `runGitHub()` because it installs every needed package automatically
 automate_loading <- function(){
             if(!require('pacman'))install.packages('pacman')
-            pacman::p_load(tidyverse,shiny,sandwich,stargazer,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp,crosstalk,DT)
+            pacman::p_load(tidyverse,shiny,readr,sandwich,stargazer,flexdashboard,highcharter,viridis,countrycode,plotly,Rcpp,crosstalk,DT)
 }
 
 automate_loading()
 data_path <- file.path(".","master.csv")
 
 
-data <- read.csv(data_path) %>% filter(
+data <- read_csv(data_path) %>% filter(
             year != 2016, # filter out 2016 and countries with 0 data.
             country != 'Dominica',
             country != 'Saint Kitts and Nevis')
@@ -122,7 +122,7 @@ data$continent[data$country %in% south_america] <- 'South America'
 data$continent[data$continent=='Americas'] <- 'North America'
 
 
-plm_id_fix <- lm(suicides.100k.pop ~ gdp_per_capita.... + sex + age+ country -1, data = data)
+plm_id_fix <- lm(`suicides/100k pop` ~ `gdp_per_capita ($)` + sex + age+ country -1, data = data)
 
 #coeftest(plm_id_fix, vcov. = vcovHC, type = "HC1")
 
@@ -151,13 +151,13 @@ continent_sex_tibble <- data %>%
             summarize(suicide_capita = round((sum(suicides_no)/sum(population))*100000, 2))
 
 dt <- data %>%
-            select(country, year, suicides_no, population, gdp_per_capita....) %>%
-            group_by(country, year, gdp_per_capita....)%>%
+            select(country, year, suicides_no, population, `gdp_per_capita ($)`) %>%
+            group_by(country, year, `gdp_per_capita ($)`)%>%
             summarise(suicide_cap = round((sum(suicides_no)/sum(population))*100000, 2))
             
 avg_dt <- dt %>%
             group_by(country)%>%
-            summarise(avg_gdp = round(sum(gdp_per_capita....)/length(gdp_per_capita....)),
+            summarise(avg_gdp = round(sum(`gdp_per_capita ($)`)/length(`gdp_per_capita ($)`)),
                       avg_sui = sum(suicide_cap)/length(suicide_cap)
                       )
 
