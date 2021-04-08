@@ -127,7 +127,7 @@ plm_id_fix <- lm(`suicides/100k pop` ~ `gdp_per_capita ($)` + sex + age+ country
 # robust standard errors
 rob_se_pan <- list(sqrt(diag(vcovHC(plm_id_fix, type = "HC1"))))
 
-res <- stargazer(plm_id_fix,      
+res <- stargazer(plm_id_fix,
                  header = FALSE, 
                  type = "html",
                  omit.table.layout = "n",
@@ -171,7 +171,7 @@ country_year_tibble <- data %>%
 
 list_x <- as.character(avg_dt$country)
 
-Rcpp::sourceCpp('enlist.cpp')
+Rcpp::sourceCpp('enlist.cpp',showOutput=F,verbose = F,windowsDebugDLL=F)
 country_list <- enlist(list_x)
 
 ### Same function but in base R and consequent benchmark to compare their speed  -----

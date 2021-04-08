@@ -2,9 +2,12 @@
 #require(shiny)
 #require(shinythemes)
 
-if(!require('pacman'))install.packages('pacman')
-pacman::p_load(shiny,shinythemes)
+load_pckg <- function(){
+  if(!require('pacman'))install.packages('pacman')
+  pacman::p_load(shiny,shinythemes)
+}
 
+load_pckg()
 source('main.R')
 
   # Define UI
