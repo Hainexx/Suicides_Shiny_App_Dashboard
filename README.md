@@ -11,7 +11,6 @@ Alternatively this Shiny App can be launched by installing the Shiny library on 
 
 Beware that every needed library will be automatically installed in your system without any further notice and loaded. The list of the needed packages can be found in *sessionInfo.txt*.
 
-**Make sure** you've installed the latest version of *R == 4.0.5 (2021-03-31) -- "Shake and Throw"* or the code won't run.
 
 ## File Descprition
 ***main.R***: 
