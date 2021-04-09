@@ -168,7 +168,7 @@ res <- append(a, res[319:325])
 
 list_x <- as.character(avg_dt$country)
 
-Rcpp::sourceCpp('enlist.cpp',showOutput=F,verbose = F,windowsDebugDLL=F)
+Rcpp::sourceCpp('enlist.cpp',showOutput=F,verbose = F)
 country_list <- enlist(list_x)
 
 ### Same function but in base R and consequent benchmark to compare their speed  -----
