@@ -39,4 +39,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-.DS_Store
+# rsconnet
+/rsconnect/ 
+
