@@ -9,7 +9,15 @@ Alternatively this Shiny App can be launched by installing the Shiny library on 
 `library(shiny)` \
 `runGitHub(repo = "Hainexx/Suicides_Shiny_App_Dashboard")`
 
-Beware that every needed library will be automatically installed in your system without any further notice and loaded. The list of the needed packages can be found in *sessionInfo.txt*.
+Every needed library will be automatically installed and loaded in your system without any further notice (the list of the needed packages can be found in *sessionInfo.txt*) but it is still required to have a C++ compiler installed.
+
+On Mac you can install it by:
+`xcode-select --install`
+On Ubuntu Linux:
+`sudo apt-get install r-base-dev`
+On Windows:
+install Rtools
+
 
 
 ## File Descprition
