@@ -11,12 +11,9 @@ Alternatively this Shiny App can be launched by installing the Shiny library on 
 
 Every needed library will be automatically installed and loaded in your system without any further notice (the list of the needed packages can be found in *sessionInfo.txt*) but it is still required to have a C++ compiler installed.
 
-On Mac you can install it by:
-`xcode-select --install`
-On Ubuntu Linux:
-`sudo apt-get install r-base-dev`
-On Windows:
-install Rtools
+On Mac you can install it by
+`xcode-select --install`, on Ubuntu Linux by
+`sudo apt-get install r-base-dev`, on Windows by installing Rtools.
 
 
 
