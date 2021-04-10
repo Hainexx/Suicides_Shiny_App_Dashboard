@@ -13,7 +13,7 @@ Every needed library will be automatically installed and loaded in your system w
 
 On Mac you can install it by
 `xcode-select --install`, on Ubuntu Linux by
-`sudo apt-get install r-base-dev`, on Windows by installing Rtools.
+`sudo apt-get install r-base-dev` and on Windows just by installing Rtools.
 
 
 
